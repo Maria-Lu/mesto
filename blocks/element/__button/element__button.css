@@ -13,4 +13,8 @@
   opacity: .5;
 }
 
+.element__button:focus {
+  background: url(../../../images/element/button-like-active.svg) #fff no-repeat center/contain;
+}
+
 
