@@ -3,7 +3,7 @@ let closeButton = document.querySelector('.popup__button-close');
 let profileName = document.querySelector('.profile__name');
 let profileAbout = document.querySelector('.profile__about');
 let popup = document.querySelector('.popup');
-let formElement = popup.querySelector('.popup__container');
+let formElement = popup.querySelector('.popup__form');
 let nameField = formElement.querySelector('.popup__input_type_name');
 let aboutField = formElement.querySelector('.popup__input_type_about');
 
