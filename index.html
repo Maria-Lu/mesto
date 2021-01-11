@@ -21,54 +21,51 @@
         </div>
         <button class="button profile__button-add" type="button"></button>
       </section>
-      <section class="elements">
-        <article class="element">
-          <img class="element__image" src="./images/element/mayak-gamov.jpg" alt="Тропинка вдоль изгороди, уходящая в туман">
-          <h2 class="element__title">Маяк Гамов</h2>
-          <button class="button element__button" type="button"></button>
-        </article>
-        <article class="element">
-          <img class="element__image" src="./images/element/khibiny-mountains.jpg" alt="Заснеженные горы на фоне синего неба">
-          <h2 class="element__title">Хибинские горы</h2>
-          <button class="button element__button" type="button"></button>
-        </article>
-        <article class="element">
-          <img class="element__image" src="./images/element/kovarditskoye.jpg" alt="Лес утром">
-          <h2 class="element__title">Ковардицкое</h2>
-          <button class="button element__button" type="button"></button>
-        </article>
-        <article class="element">
-          <img class="element__image" src="./images/element/ladoga-lake.jpg" alt="Восход на озере">
-          <h2 class="element__title">Озеро Ладога</h2>
-          <button class="button element__button" type="button"></button>
-        </article>
-        <article class="element">
-            <img class="element__image" src="./images/element/arkhyz.jpg" alt="Горные склоны, покрытые травой">
-            <h2 class="element__title">Архыз</h2>
-            <button class="button element__button" type="button"></button>
-        </article>
-        <article class="element">
-          <img class="element__image" src="./images/element/sochi.jpg" alt="Вид с высоты на город в горах">
-          <h2 class="element__title">Сочи</h2>
-          <button class="button element__button" type="button"></button>
-        </article>
-      </section>
+      <section class="elements"></section>
     </main>
     <footer class="footer section page__section">
       <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
     </footer>
-    <section class="popup">
+    <section class="popup profile-popup">
       <div class="popup__container">
         <h2 class="popup__title">Редактировать профиль</h2>
         <button class="button popup__button-close" type="button"></button>
         <form class="popup__form" name="info">
           <input class="popup__input popup__input_type_name" type="text" name="name" placeholder="Имя" required>
           <input class="popup__input popup__input_type_about" type="text" name="about" placeholder="О себе" required>
-          <button class="button popup__button-submit" type="submit" >Сохранить</button>
+          <button class="button popup__button-submit" type="submit">Сохранить</button>
         </form>
       </div>
     </section>
+    <section class="popup image-popup">
+      <div class="popup__container">
+        <h2 class="popup__title">Новое место</h2>
+        <button class="button popup__button-close" type="button"></button>
+        <form class="popup__form" name="info">
+          <input class="popup__input popup__input_type_name" type="text" name="name" placeholder="Название" required>
+          <input class="popup__input popup__input_type_link" type="url" name="link" placeholder="Ссылка на картинку" required>
+          <button class="button popup__button-submit" type="submit">Создать</button>
+        </form>
+      </div>
+    </section>
+    <section class="popup zoom-popup">
+      <div class="zoom-popup__container">
+        <button class="button popup__button-close" type="button"></button>
+        <figure class="zoom-popup__figure">
+          <img class="zoom-popup__image" src="https://images.unsplash.com/photo-1609252880721-0d953278bcda?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1950&q=80" alt="Пример изображения">
+          <figcaption class="zoom-popup__caption"></figcaption>
+        </figure>
+      </div>
+    </section>
   </div>
+  <template class="element-template">
+    <article class="element">
+      <button class="button element__button-trash" type="reset"></button>
+      <div class="element__image-container"><img class="element__image" src="" alt=""></div>
+      <h2 class="element__title"></h2>
+      <button class="button element__button-like" type="button"></button>
+    </article>
+  </template>
   <script src="./scripts/index.js"></script>
 </body>
 </html>

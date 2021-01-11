@@ -1,4 +1,4 @@
-.element__button {
+.element__button-like {
   width: 21px;
   height: 19px;
   background: url(../../../images/element/button-like.svg) #fff no-repeat center/contain;
@@ -6,15 +6,8 @@
   margin: 6px 18px 0 0;
   grid-column: 2;
   grid-row: 2;
-  transition: opacity .5s ease-in;
 }
 
-.element__button:hover {
+.element__button-like:hover {
   opacity: .5;
 }
-
-.element__button:focus {
-  background: url(../../../images/element/button-like-active.svg) #fff no-repeat center/contain;
-}
-
-
