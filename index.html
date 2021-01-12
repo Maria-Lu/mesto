@@ -26,7 +26,7 @@
     <footer class="footer section page__section">
       <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
     </footer>
-    <section class="popup profile-popup">
+    <section class="popup user-profile-popup">
       <div class="popup__container">
         <h2 class="popup__title">Редактировать профиль</h2>
         <button class="button popup__button-close" type="button"></button>
@@ -37,7 +37,7 @@
         </form>
       </div>
     </section>
-    <section class="popup image-popup">
+    <section class="popup user-picture-popup">
       <div class="popup__container">
         <h2 class="popup__title">Новое место</h2>
         <button class="button popup__button-close" type="button"></button>
@@ -48,12 +48,12 @@
         </form>
       </div>
     </section>
-    <section class="popup zoom-popup">
-      <div class="zoom-popup__container">
+    <section class="popup preview-popup">
+      <div class="preview-popup__container">
         <button class="button popup__button-close" type="button"></button>
-        <figure class="zoom-popup__figure">
-          <img class="zoom-popup__image" src="https://images.unsplash.com/photo-1609252880721-0d953278bcda?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1950&q=80" alt="Пример изображения">
-          <figcaption class="zoom-popup__caption"></figcaption>
+        <figure class="preview-popup__figure">
+          <img class="preview-popup__image" src="https://images.unsplash.com/photo-1609252880721-0d953278bcda?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1950&q=80" alt="Пример изображения">
+          <figcaption class="preview-popup__caption"></figcaption>
         </figure>
       </div>
     </section>
@@ -61,11 +61,14 @@
   <template class="element-template">
     <article class="element">
       <button class="button element__button-trash" type="reset"></button>
-      <div class="element__image-container"><img class="element__image" src="https://images.unsplash.com/photo-1609252880721-0d953278bcda?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1950&q=80" alt="Пример изображения"></div>
+      <div class="element__image-container">
+        <img class="element__image" src="https://images.unsplash.com/photo-1609252880721-0d953278bcda?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1950&q=80" alt="Пример изображения">
+      </div>
       <h2 class="element__title"></h2>
       <button class="button element__button-like" type="button"></button>
     </article>
   </template>
+  <script src="./scripts/initial-elements.js"></script>
   <script src="./scripts/index.js"></script>
 </body>
 </html>
