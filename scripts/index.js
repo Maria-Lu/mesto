@@ -56,10 +56,10 @@ function deleteElement(evt) {
   evt.target.closest('.element').remove();
 }
 
-function handlePreviewPicture(name, link) {
-  previewImage.alt = name;
-  previewImage.src = link;
-  previewCaption.textContent = name;
+function handlePreviewPicture(data) {
+  previewImage.alt = data.name;
+  previewImage.src = data.link;
+  previewCaption.textContent = data.name;
   openPopup(previewPopup);
 }
 
@@ -72,14 +72,13 @@ function createElement(data) {
 
   elementImage.alt = data.name;
   elementImage.src = data.link;
-
   elementTitle.textContent = data.name;
 
   elementLikeButton.addEventListener('click', handleLikeIcon);
 
   elementDeleteButton.addEventListener('click', deleteElement);
 
-  elementImage.addEventListener('click', () => handlePreviewPicture(data.name, data.link));
+  elementImage.addEventListener('click', () => handlePreviewPicture(data));
 
   return element;
 }
@@ -94,11 +93,10 @@ initialElements.forEach((data) => {
 
 function addNewElement (evt) {
   evt.preventDefault();
-  const userData = {
+  renderElement({
     name: userPictureNameField.value,
     link: userPictureLinkField.value
-  };
-  renderElement(userData, elements);
+  }, elements);
   closePopup(userPicturePopup);
   userPictureForm.reset();
 }
