@@ -9,7 +9,7 @@ const popupList = Array.from(document.querySelectorAll('.popup'));
 
 const userPicturePopup = document.querySelector('.user-picture-popup');
 const userPictureForm = userPicturePopup.querySelector('.popup__form');
-const userPictureNameField = userPictureForm.querySelector('.popup__input_type_name');
+const userPictureNameField = userPictureForm.querySelector('.popup__input_type_picture-name');
 const userPictureLinkField = userPictureForm.querySelector('.popup__input_type_link');
 
 const previewPopup = document.querySelector('.preview-popup');
