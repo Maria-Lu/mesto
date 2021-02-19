@@ -1,3 +1,7 @@
+import { initialElements } from './initial-elements.js';
+import Card from './card.js';
+import FormValidator from './FormValidator.js';
+
 const userProfileEditButton = document.querySelector('.profile__button-edit');
 
 const profileName = document.querySelector('.profile__name');
@@ -22,7 +26,19 @@ const userProfileNameField = userProfileForm.querySelector('.popup__input_type_n
 const userProfileAboutField = userProfileForm.querySelector('.popup__input_type_about');
 
 const elements = document.querySelector('.elements');
-const elementTemplate = document.querySelector('.element-template').content;
+const elementTemplate = '.element-template';
+
+const validateData = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button-submit',
+  inactiveButtonClass: 'popup__button-submit_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_visible'
+};
+
+const userPictureFormValidator = new FormValidator(validateData, userPictureForm);
+const userProfileFormValidator = new FormValidator(validateData, userProfileForm);
 
 function openPopup(popup) {
   popup.classList.add('popup_opened');
@@ -30,14 +46,14 @@ function openPopup(popup) {
 }
 
 function openProfileForm() {
-  cleanForm(userProfilePopup);
+  userProfileFormValidator.enableValidation();
   userProfileNameField.value = profileName.textContent;
   userProfileAboutField.value = profileAbout.textContent;
   openPopup(userProfilePopup);
 }
 
 function openPictureForm() {
-  cleanForm(userPicturePopup);
+  userPictureFormValidator.enableValidation();
   openPopup(userPicturePopup);
 }
 
@@ -63,7 +79,7 @@ function closePopupOnOverlayClick (popup) {
     if(evt.target === evt.currentTarget) {
       closePopup(popup);
     }
-  })
+  });
 }
 
 function closePopupByEscapeKey (evt) {
@@ -73,47 +89,19 @@ function closePopupByEscapeKey (evt) {
   }
 }
 
-function handleLikeIcon(evt) {
-  evt.target.classList.toggle('element__button-like_active');
+function createElement(data, elementTemplateSelector) {
+  const card = new Card(data, elementTemplateSelector, openPopup, previewPopup, previewImage, previewCaption);
+  const cardElement = card.createCard();
+
+  return cardElement;
 }
 
-function deleteElement(evt) {
-  evt.target.closest('.element').remove();
-}
-
-function handlePreviewPicture(data) {
-  previewImage.alt = data.name;
-  previewImage.src = data.link;
-  previewCaption.textContent = data.name;
-  openPopup(previewPopup);
-}
-
-function createElement(data) {
-  const element = elementTemplate.cloneNode(true);
-  const elementImage = element.querySelector('.element__image');
-  const elementTitle = element.querySelector('.element__title');
-  const elementLikeButton = element.querySelector('.element__button-like');
-  const elementDeleteButton = element.querySelector('.element__button-trash');
-
-  elementImage.alt = data.name;
-  elementImage.src = data.link;
-  elementTitle.textContent = data.name;
-
-  elementLikeButton.addEventListener('click', handleLikeIcon);
-
-  elementDeleteButton.addEventListener('click', deleteElement);
-
-  elementImage.addEventListener('click', () => handlePreviewPicture(data));
-
-  return element;
-}
-
-function renderElement(data, wrap) {
-  wrap.prepend(createElement(data));
+function renderElement(data, wrap, elementTemplateSelector) {
+  wrap.prepend(createElement(data, elementTemplateSelector));
 }
 
 initialElements.forEach((data) => {
-  renderElement(data, elements);
+  renderElement(data, elements, elementTemplate);
 });
 
 function addNewElement (evt) {
@@ -121,7 +109,7 @@ function addNewElement (evt) {
   renderElement({
     name: userPictureNameField.value,
     link: userPictureLinkField.value
-  }, elements);
+  }, elements, elementTemplate);
   closePopup(userPicturePopup);
   userPictureForm.reset();
 }
