@@ -1,12 +1,12 @@
 export default class Card {
-  constructor(data, elementTemplateSelector, openPopup, previewPopup, previewImage, previewCaption) {
+  constructor(data, openPopup, {elementTemplateSelector, previewPopupSelector, previewImageSelector, previewCaptionSelector}) {
     this._title = data.name;
     this._link = data.link;
     this._cardSelector = elementTemplateSelector;
     this._openPopup = openPopup;
-    this._previewPopup = previewPopup;
-    this._previewImage = previewImage;
-    this._previewCaption = previewCaption;
+    this._previewPopupSelector = previewPopupSelector;
+    this._previewImageSelector = previewImageSelector;
+    this._previewCaptionSelector = previewCaptionSelector;
   }
 
   _getTemplate() {
@@ -46,6 +46,9 @@ export default class Card {
   }
 
   _handlePreviewPicture() {
+    this._previewPopup = document.querySelector(this._previewPopupSelector);
+    this._previewImage = this._previewPopup.querySelector(this._previewImageSelector);
+    this._previewCaption = this._previewPopup.querySelector(this._previewCaptionSelector);
     this._previewImage.alt = this._title;
     this._previewImage.src = this._link;
     this._previewCaption.textContent = this._title;

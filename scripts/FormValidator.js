@@ -65,18 +65,17 @@ export default class FormValidator {
       }
     }
 
-    _cleanForm() {
+    cleanForm() {
       this._inputList.forEach((inputElement) => {
         inputElement.value = '';
         this._hideInputError(inputElement);
-      })
+      });
       this._buttonElement.classList.add(this._inactiveButtonClass);
       this._buttonElement.setAttribute('disabled', true);
     }
 
     enableValidation() {
       this._setEventListeners();
-      this._cleanForm();
     }
 
 }

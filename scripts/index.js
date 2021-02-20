@@ -16,17 +16,19 @@ const userPictureForm = userPicturePopup.querySelector('.popup__form');
 const userPictureNameField = userPictureForm.querySelector('.popup__input_type_picture-name');
 const userPictureLinkField = userPictureForm.querySelector('.popup__input_type_link');
 
-const previewPopup = document.querySelector('.preview-popup');
-const previewImage = previewPopup.querySelector('.preview-popup__image');
-const previewCaption = previewPopup.querySelector('.preview-popup__caption');
-
 const userProfilePopup = document.querySelector('.user-profile-popup');
 const userProfileForm = userProfilePopup.querySelector('.popup__form');
 const userProfileNameField = userProfileForm.querySelector('.popup__input_type_name');
 const userProfileAboutField = userProfileForm.querySelector('.popup__input_type_about');
 
 const elements = document.querySelector('.elements');
-const elementTemplate = '.element-template';
+
+const cardData = {
+  elementTemplateSelector:'.element-template',
+  previewPopupSelector:'.preview-popup',
+  previewImageSelector:'.preview-popup__image',
+  previewCaptionSelector:'.preview-popup__caption'
+};
 
 const validateData = {
   formSelector: '.popup__form',
@@ -46,14 +48,14 @@ function openPopup(popup) {
 }
 
 function openProfileForm() {
-  userProfileFormValidator.enableValidation();
+  userProfileFormValidator.cleanForm();
   userProfileNameField.value = profileName.textContent;
   userProfileAboutField.value = profileAbout.textContent;
   openPopup(userProfilePopup);
 }
 
 function openPictureForm() {
-  userPictureFormValidator.enableValidation();
+  userPictureFormValidator.cleanForm();
   openPopup(userPicturePopup);
 }
 
@@ -89,19 +91,19 @@ function closePopupByEscapeKey (evt) {
   }
 }
 
-function createElement(data, elementTemplateSelector) {
-  const card = new Card(data, elementTemplateSelector, openPopup, previewPopup, previewImage, previewCaption);
+function createElement(data) {
+  const card = new Card(data, openPopup, cardData);
   const cardElement = card.createCard();
 
   return cardElement;
 }
 
-function renderElement(data, wrap, elementTemplateSelector) {
-  wrap.prepend(createElement(data, elementTemplateSelector));
+function renderElement(data, wrap) {
+  wrap.prepend(createElement(data));
 }
 
 initialElements.forEach((data) => {
-  renderElement(data, elements, elementTemplate);
+  renderElement(data, elements);
 });
 
 function addNewElement (evt) {
@@ -109,7 +111,7 @@ function addNewElement (evt) {
   renderElement({
     name: userPictureNameField.value,
     link: userPictureLinkField.value
-  }, elements, elementTemplate);
+  }, elements);
   closePopup(userPicturePopup);
   userPictureForm.reset();
 }
@@ -128,5 +130,7 @@ popupList.forEach((popupElement) => {
 }
 );
 
+userProfileFormValidator.enableValidation();
+userPictureFormValidator.enableValidation();
 
 
