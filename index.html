@@ -30,7 +30,7 @@
       <div class="popup__container">
         <h2 class="popup__title">Редактировать профиль</h2>
         <button class="button popup__button-close" type="button"></button>
-        <form class="popup__form" name="info" novalidate>
+        <form class="popup__form user-profile-popup__form" name="info" novalidate>
           <input id="name-input"  class="popup__input popup__input_type_name" type="text" name="name" placeholder="Имя" required minlength="2" maxlength="40">
           <span class="popup__error name-input-error"></span>
           <input id="about-input" class="popup__input popup__input_type_about" type="text" name="about" placeholder="О себе" required minlength="2" maxlength="200">
@@ -43,7 +43,7 @@
       <div class="popup__container">
         <h2 class="popup__title">Новое место</h2>
         <button class="button popup__button-close" type="button"></button>
-        <form class="popup__form" name="info" novalidate>
+        <form class="popup__form user-picture-popup__form" name="info" novalidate>
           <input id="name-picture-input" class="popup__input popup__input_type_picture-name" type="text" name="name" placeholder="Название" required minlength="2" maxlength="30">
           <span class="popup__error name-picture-input-error"></span>
           <input id="link-input" class="popup__input popup__input_type_link" type="url" name="link" placeholder="Ссылка на картинку" required>
@@ -72,9 +72,6 @@
       <button class="button element__button-like" type="button"></button>
     </article>
   </template>
-  <script type="module" src="./scripts/initial-elements.js"></script>
-  <script type="module" src="./scripts/FormValidator.js"></script>
-  <script type="module" src="./scripts/index.js"></script>
-  <script type="module" src="./scripts/Card.js"></script>
+  <script type="module" src="./pages/index.js"></script>
 </body>
 </html>

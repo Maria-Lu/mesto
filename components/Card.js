@@ -1,12 +1,12 @@
 export default class Card {
-  constructor(data, openPopup, {elementTemplateSelector, previewPopupSelector, previewImageSelector, previewCaptionSelector}) {
+  constructor(data, handlePreviewPicture, {elementTemplateSelector, previewPopupSelector, previewImageSelector, previewCaptionSelector}) {
     this._title = data.name;
     this._link = data.link;
     this._cardSelector = elementTemplateSelector;
-    this._openPopup = openPopup;
     this._previewPopupSelector = previewPopupSelector;
     this._previewImageSelector = previewImageSelector;
     this._previewCaptionSelector = previewCaptionSelector;
+    this._handlePreviewPicture = handlePreviewPicture;
   }
 
   _getTemplate() {
@@ -34,7 +34,7 @@ export default class Card {
   _setEventListeners() {
     this._card.querySelector('.element__button-like').addEventListener('click', this._handleLikeIcon);
     this._card.querySelector('.element__button-trash').addEventListener('click', this._deleteCard);
-    this._cardImage.addEventListener('click', () => this._handlePreviewPicture());
+    this._cardImage.addEventListener('click', this._handlePreviewPicture.bind(this));
   }
 
   _handleLikeIcon(evt) {
@@ -43,16 +43,6 @@ export default class Card {
 
   _deleteCard(evt) {
     evt.target.closest('.element').remove();
-  }
-
-  _handlePreviewPicture() {
-    this._previewPopup = document.querySelector(this._previewPopupSelector);
-    this._previewImage = this._previewPopup.querySelector(this._previewImageSelector);
-    this._previewCaption = this._previewPopup.querySelector(this._previewCaptionSelector);
-    this._previewImage.alt = this._title;
-    this._previewImage.src = this._link;
-    this._previewCaption.textContent = this._title;
-    this._openPopup(this._previewPopup);
   }
 
 }
