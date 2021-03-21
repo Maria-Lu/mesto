@@ -1,5 +1,8 @@
 export default class Card {
-  constructor(data, handlePreviewPicture, {elementTemplateSelector, previewPopupSelector, previewImageSelector, previewCaptionSelector}) {
+  constructor(data, handlePreviewPicture, handleDeleteCard, handleLikeIcon, id,
+    {elementTemplateSelector, previewPopupSelector, previewImageSelector,
+      previewCaptionSelector}) {
+    this._data = data;
     this._title = data.name;
     this._link = data.link;
     this._cardSelector = elementTemplateSelector;
@@ -7,6 +10,9 @@ export default class Card {
     this._previewImageSelector = previewImageSelector;
     this._previewCaptionSelector = previewCaptionSelector;
     this._handlePreviewPicture = handlePreviewPicture;
+    this._handleDeleteCard = handleDeleteCard;
+    this._handleLikeIcon = handleLikeIcon;
+    this._id = id
   }
 
   _getTemplate() {
@@ -26,23 +32,49 @@ export default class Card {
     this._cardImage.alt = this._title;
     this._card.querySelector('.element__title').textContent = this._title;
 
+    this._cardLikeButton = this._card.querySelector('.element__button-like');
+    this._cardLikeCounter = this._card.querySelector('.element__like-counter');
+
+    this._cardDeleteButton = this._card.querySelector('.element__button-trash');
+    if (!this._isMyCard()) {
+      this._cardDeleteButton.remove();
+    }
+
+    this.toggleLikeIcon(this._data);
     this._setEventListeners();
 
     return this._card;
   }
 
   _setEventListeners() {
-    this._card.querySelector('.element__button-like').addEventListener('click', this._handleLikeIcon);
-    this._card.querySelector('.element__button-trash').addEventListener('click', this._deleteCard);
+    this._cardLikeButton.addEventListener('click', this._handleLikeIcon.bind(this));
+
+    if (this._isMyCard()) {
+      this._cardDeleteButton.addEventListener('click', this._handleDeleteCard.bind(this));
+    }
+
     this._cardImage.addEventListener('click', this._handlePreviewPicture.bind(this));
   }
 
-  _handleLikeIcon(evt) {
-    evt.target.classList.toggle('element__button-like_active');
+  _isMyCard() {
+    return this._data.owner._id === this._id;
   }
 
-  _deleteCard(evt) {
-    evt.target.closest('.element').remove();
+  hasMyLike(data) {
+    return data.likes.some((like) => {
+      return like._id === this._id;
+    });
+  }
+
+  toggleLikeIcon(newData) {
+    if (this.hasMyLike(newData)) {
+      this._cardLikeButton.classList.add('element__button-like_active');
+    }
+    else {
+      this._cardLikeButton.classList.remove('element__button-like_active');
+    }
+    this._cardLikeCounter.textContent = newData.likes.length;
+    this._data = newData;
   }
 
 }

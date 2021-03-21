@@ -6,6 +6,8 @@ export default class PopupWithForm extends Popup {
     this._handleFormSubmit = handleFormSubmit;
     this._cleanForm = cleanForm;
     this._popupForm = this._popup.querySelector('.popup__form');
+    this._submitButton = this._popup.querySelector('.popup__button-submit');
+    this._submitButtonText = this._submitButton.textContent
   }
 
   submitForm(evt) {
@@ -29,6 +31,14 @@ export default class PopupWithForm extends Popup {
       (result, current) => ({ ...result, [current.name]: current.value }),
       {},
     );
+  }
+
+  showLoader(text) {
+    this._submitButton.textContent = text;
+  }
+
+  hideLoader() {
+    this._submitButton.textContent = this._submitButtonText;
   }
 
 }

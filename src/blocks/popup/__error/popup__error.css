@@ -5,22 +5,17 @@
   color: #ff0000;
   transition: 0.3s;
   visibility: hidden;
-  position: absolute;
-  top: 138px;
-  left: 36px;
+  min-height: 30px;
+  display: block;
+  margin: 5px 0 0;
 }
 
 .popup__error:last-of-type {
-  top: 198px;
+  margin: 5px 0 13px;
 }
 
 @media screen and (max-width: 425px) {
-  .popup__error {
-    top: 150px;
-    left: 22px;
-  }
-
   .popup__error:last-of-type {
-    top: 210px;
+    margin: 5px 0 10px;
   }
 }
