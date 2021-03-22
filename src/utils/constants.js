@@ -26,12 +26,9 @@ export const userAvatarEditButton = document.querySelector('.profile__overlay');
 
 export const elementsSelector = '.elements';
 
-export const cardData = {
-  elementTemplateSelector:'.element-template',
-  previewPopupSelector:'.preview-popup',
-  previewImageSelector:'.preview-popup__image',
-  previewCaptionSelector:'.preview-popup__caption'
-};
+export const elementTemplateSelector = '.element-template';
+
+export const previewPopupSelector = '.preview-popup';
 
 export const validateData = {
   formSelector: '.popup__form',
@@ -41,3 +38,4 @@ export const validateData = {
   inputErrorClass: 'popup__input_type_error',
   errorClass: 'popup__error_visible'
 };
+

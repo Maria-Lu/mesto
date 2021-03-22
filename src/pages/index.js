@@ -12,8 +12,9 @@ import PopupWithConfirmation from '../components/PopupWithConfirmation.js';
 import { userProfileEditButton, profileSelectorsData, userPictureAddButton,
         userPicturePopupSelector, userPictureForm, userProfilePopupSelector,
         userProfileForm, userProfileNameField, userProfileAboutField,
-        elementsSelector, cardData, validateData, confirmPopupSelector,
-        userAvatarPopupSelector, userAvatarForm, userAvatarEditButton
+        elementsSelector, elementTemplateSelector, previewPopupSelector,
+        validateData, confirmPopupSelector, userAvatarPopupSelector,
+        userAvatarForm, userAvatarEditButton
       } from '../utils/constants.js';
 
 
@@ -25,21 +26,15 @@ const api = new Api({
   }
 });
 
-api.getUserData()
-  .then((result) => {
-     userInfo.setNewUserInfo(result);
-    })
+Promise.all([api.getUserData(), api.getInitialCards()])
+  .then(([userData, initialCards]) => {
+    userInfo.setNewUserInfo(userData);
+    cardList.renderItems(initialCards);
+  })
   .catch((err) => {
-    console.log(`Ошибка: ${err}`);
+    console.log(err);
   });
 
-api.getInitialCards()
-  .then((result) => {
-    cardList.renderItems(result);
-   })
-  .catch((err) => {
-    console.log(`Ошибка: ${err}`);
-  });
 
 const userPictureFormValidator = new FormValidator(validateData, userPictureForm);
 const userProfileFormValidator = new FormValidator(validateData, userProfileForm);
@@ -50,7 +45,7 @@ userPictureFormValidator.enableValidation();
 userAvatarFormValidator.enableValidation();
 
 
-const prewiewPicturePopup = new PopupWithImage(cardData.previewPopupSelector);
+const prewiewPicturePopup = new PopupWithImage(previewPopupSelector);
 prewiewPicturePopup.setEventListeners();
 
 
@@ -71,7 +66,7 @@ function createElement(data) {
             this.toggleLikeIcon(result);
           })
           .catch((err) => {
-            console.log(`Ошибка: ${err}`);
+            console.log(err);
           });
       } else {
         api.likeCard(this._data._id)
@@ -79,12 +74,12 @@ function createElement(data) {
             this.toggleLikeIcon(result);
           })
           .catch((err) => {
-            console.log(`Ошибка: ${err}`);
+            console.log(err);
           });
         }
       },
     userInfo.getUserId(),
-    cardData
+    elementTemplateSelector
   );
   const cardElement = card.createCard();
   return cardElement;
@@ -112,7 +107,7 @@ const userAvatarPopup = new PopupWithForm(
         userAvatarPopup.close();
       })
       .catch((err) => {
-        console.log(`Ошибка: ${err}`);
+        console.log(err);
       })
       .finally(() => {
         this.hideLoader();
@@ -165,7 +160,7 @@ const userPicturePopup = new PopupWithForm(
         userPicturePopup.close();
       })
       .catch((err) => {
-        console.log(`Ошибка: ${err}`);
+        console.log(err);
       })
       .finally(() => {
         this.hideLoader();
@@ -187,7 +182,7 @@ const confirmPopup = new PopupWithConfirmation(
         this.card.remove();
       })
       .catch((err) => {
-        console.log(`Ошибка: ${err}`);
+        console.log(err);
       });
     confirmPopup.close();
   }

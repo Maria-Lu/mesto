@@ -1,14 +1,10 @@
 export default class Card {
-  constructor(data, handlePreviewPicture, handleDeleteCard, handleLikeIcon, id,
-    {elementTemplateSelector, previewPopupSelector, previewImageSelector,
-      previewCaptionSelector}) {
+  constructor(data, handlePreviewPicture, handleDeleteCard, handleLikeIcon,
+    id, elementTemplateSelector) {
     this._data = data;
     this._title = data.name;
     this._link = data.link;
     this._cardSelector = elementTemplateSelector;
-    this._previewPopupSelector = previewPopupSelector;
-    this._previewImageSelector = previewImageSelector;
-    this._previewCaptionSelector = previewCaptionSelector;
     this._handlePreviewPicture = handlePreviewPicture;
     this._handleDeleteCard = handleDeleteCard;
     this._handleLikeIcon = handleLikeIcon;
